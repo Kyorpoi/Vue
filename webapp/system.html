@@ -1,0 +1,77 @@
+<!--
+* @Author: 凛冬
+* @Date:   2018-08-30
+* @Last Modified by:   凛冬
+* @Last Modified time: 2018-08-30
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>系统管理</title>
+	<meta charset="utf-8">
+	<!--引入element2.4.6样式-->
+	<link rel="stylesheet" href="css/element.css">
+	<!--引入自写样式-->
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<!--引入vue2.5.17框架-->
+	<script src="js/vue.js"></script>
+	<!--引入element2.4.6组件-->
+	<script src="js/element.js"></script>
+	<!--引入自写JS-->
+	<script src="js/javascript.js"></script>
+</head>
+<body>
+<!--加载标签栏-->
+<div id="label">
+	<el-menu :default-active="activeIndex" token="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+	<el-menu-item index="1"><a href="index.html">系统概况</a></el-menu-item>
+    <el-menu-item index="2"><a href="student.html">学生管理</a></el-menu-item>
+    <el-menu-item index="3"><a href="teacher.html">教师管理</a></el-menu-item>
+    <el-menu-item index="4"><a href="log.html">日志管理</a></el-menu-item>
+    <el-menu-item index="5"><a href="email.html">邮件管理</a></el-menu-item>
+    <el-menu-item index="6"><a href="warn.html">告警管理</a></el-menu-item>
+    <el-menu-item index="7"><a href="admin.html">管理员管理</a></el-menu-item>
+    <el-menu-item index="8"><a href="app.html">应用管理</a></el-menu-item>
+    <el-menu-item index="9"><a href="system.html">系统管理</a></el-menu-item>
+</div>
+
+<div id="setting"><br><br>
+<span class="setinput">重试次数</span><el-input v-model="input" placeholder="9999" class="input"></el-input><br><br><br>
+<span class="setinput">回调ID有效期</span><el-input v-model="input" placeholder="9999s" class="input"></el-input><br><br><br>
+<span class="setinput">SMTP服务器</span><el-input v-model="input" placeholder="127.0.0.1" class="input"></el-input><br><br><br>
+<span class="setinput">xxxxxx</span><el-input v-model="input" placeholder="xxxxxx" class="input"></el-input><br><br><br>
+<span class="setinput">xxxxxx</span><el-input v-model="input" placeholder="xxxxxx" class="input"></el-input><br><br><br>
+<span class="setinput">xxxxxx</span><el-input v-model="input" placeholder="xxxxxx" class="input"></el-input>
+</div>
+
+<!-- -->
+<script type="text/javascript">
+	var Main = {
+	    data() {
+	      return {
+	        activeIndex: '9'
+	      };
+	    },
+	    methods: {
+	      handleSelect(key, keyPath) {
+	        console.log(key, keyPath);
+	      }
+	    }
+	  }
+	var Ctor = Vue.extend(Main)
+	new Ctor().$mount('#label')
+</script>
+
+<script type="text/javascript">
+var setting = {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+var Ctor = Vue.extend(setting)
+new Ctor().$mount('#setting')
+</script>
+</body>
+</html>

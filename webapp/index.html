@@ -1,0 +1,138 @@
+<!--
+* @Author: 凛冬
+* @Date:   2018-08-27
+* @Last Modified by:   凛冬
+* @Last Modified time: 2018-08-30
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>系统概况</title>
+	<meta charset="utf-8">
+	<!--引入element2.4.6样式-->
+	<link rel="stylesheet" href="css/element.css">
+	<!--引入自写样式-->
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<!--引入vue2.5.17框架-->
+	<script src="js/vue.js"></script>
+	<!--引入element2.4.6组件-->
+	<script src="js/element.js"></script>
+	<!--引入自写JS-->
+	<script src="js/javascript.js"></script>
+</head>
+<body>
+<!--加载标签栏-->
+<div id="label">
+	<el-menu :default-active="activeIndex" logintime="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+	<el-menu-item index="1"><a href="index.html">系统概况</a></el-menu-item>
+    <el-menu-item index="2"><a href="student.html">学生管理</a></el-menu-item>
+    <el-menu-item index="3"><a href="teacher.html">教师管理</a></el-menu-item>
+    <el-menu-item index="4"><a href="log.html">日志管理</a></el-menu-item>
+    <el-menu-item index="5"><a href="email.html">邮件管理</a></el-menu-item>
+    <el-menu-item index="6"><a href="warn.html">告警管理</a></el-menu-item>
+    <el-menu-item index="7"><a href="admin.html">管理员管理</a></el-menu-item>
+    <el-menu-item index="8"><a href="app.html">应用管理</a></el-menu-item>
+    <el-menu-item index="9"><a href="system.html">系统管理</a></el-menu-item>
+</div>
+<br>
+<!--引入图表-->
+<div id="chert">
+	<div id="linechart">
+		<p>折线图</p>
+	</div>
+
+	<div id="histogram">
+		<p>柱状图</p>
+	</div>
+</div>
+<!--加载表格-->
+<div id="table">
+<template>
+  <el-table :data="tableData" border stripe style="width: 100%">
+    <el-table-column prop="security" label="安全等级" width="100">
+    </el-table-column>
+    <el-table-column prop="loginuser" label="登入用户" width="220">
+    </el-table-column>
+    <el-table-column prop="loginip" label="IP" width="200">
+    </el-table-column>
+    <el-table-column prop="platform" label="登入平台" width="180">
+    </el-table-column>
+    <el-table-column prop="logintime" label="登入时间">
+    </el-table-column>
+  </el-table>
+</template>
+</div>
+<!-- -->
+<script type="text/javascript">
+	var Main = {
+	    data() {
+	      return {
+	        activeIndex: '1'
+	      };
+	    },
+	    methods: {
+	      handleSelect(key, keyPath) {
+	        console.log(key, keyPath);
+	      }
+	    }
+	  }
+	var Ctor = Vue.extend(Main)
+	new Ctor().$mount('#label')
+</script>
+<!--表格数据-->
+<script type="text/javascript">
+var table = {
+    data() {
+      return {
+        tableData: [{
+          security: '安全',
+          loginuser: '学生1登录成功',
+          loginip: '127.127.127.127',
+          platform: '测试平台',
+          logintime: '2018-12-12 12:12:12',
+        },
+        {
+          security: '危险',
+          loginuser: '学生2登录失败(9次)',
+          loginip: '127.127.127.127',
+          platform: '测试平台',
+          logintime: '2018-12-12 12:12:12',
+        },
+        {
+          security: '安全',
+          loginuser: '学生3登录成功',
+          loginip: '127.127.127.127',
+          platform: '测试平台',
+          logintime: '2018-12-12 12:12:12',
+        },
+        {
+          security: '危险',
+          loginuser: '学生4登录失败(2次)',
+          loginip: '127.127.127.127',
+          platform: '测试平台',
+          logintime: '2018-12-12 12:12:12',
+        },
+        {
+          security: '安全',
+          loginuser: '学生5登录成功',
+          loginip: '127.127.127.127',
+          platform: '测试平台',
+          logintime: '2018-12-12 12:12:12',
+        },
+        {
+          security: '危险',
+          loginuser: '学生6登录失败(1次)',
+          loginip: '127.127.127.127',
+          platform: '测试平台',
+          logintime: '2018-12-12 12:12:12',
+        },
+        ]
+      }
+    }
+  }
+var Ctor1 = Vue.extend(table)
+new Ctor1().$mount('#table')
+</script>
+
+</body>
+</html>

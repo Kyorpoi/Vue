@@ -1,0 +1,254 @@
+<!--
+* @Author: 凛冬
+* @Date:   2018-08-30
+* @Last Modified by:   凛冬
+* @Last Modified time: 2018-08-30
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>邮件管理</title>
+	<meta charset="utf-8">
+	<!--引入element2.4.6样式-->
+	<link rel="stylesheet" href="css/element.css">
+	<!--引入自写样式-->
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<!--引入vue2.5.17框架-->
+	<script src="js/vue.js"></script>
+	<!--引入element2.4.6组件-->
+	<script src="js/element.js"></script>
+	<!--引入自写JS-->
+	<script src="js/javascript.js"></script>
+</head>
+<body>
+<!--加载标签栏-->
+<div id="label">
+	<el-menu :default-active="activeIndex" content="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+    <el-menu-item index="1"><a href="index.html">系统概况</a></el-menu-item>
+	<el-menu-item index="2"><a href="student.html">学生管理</a></el-menu-item>
+	<el-menu-item index="3"><a href="teacher.html">教师管理</a></el-menu-item>
+	<el-menu-item index="4"><a href="log.html">日志管理</a></el-menu-item>
+	<el-menu-item index="5"><a href="email.html">邮件管理</a></el-menu-item>
+	<el-menu-item index="6"><a href="warn.html">告警管理</a></el-menu-item>
+	<el-menu-item index="7"><a href="admin.html">管理员管理</a></el-menu-item>
+	<el-menu-item index="8"><a href="app.html">应用管理</a></el-menu-item>
+	<el-menu-item index="9"><a href="system.html">系统管理</a></el-menu-item>
+</div>
+<!--加载列表-->
+<div id="list">
+	<!--列表1-->
+	<div id="list1">
+		<el-dropdown trigger="click">
+		  <el-button>
+		    根据主机筛选 ∨
+		  </el-button>
+		  <el-dropdown-menu slot="dropdown">
+		    <el-dropdown-item>选项1</el-dropdown-item>
+		    <el-dropdown-item>选项2</el-dropdown-item>
+		    <el-dropdown-item>选项3</el-dropdown-item>
+		    <el-dropdown-item>选项4</el-dropdown-item>
+		    <el-dropdown-item>选项5</el-dropdown-item>
+		  </el-dropdown-menu>
+		</el-dropdown>
+	</div>
+	<!--列表2-->
+	<div id="list2">
+		<el-dropdown trigger="click">
+		  <el-button>
+		    根据类型筛选 ∨
+		  </el-button>
+		  <el-dropdown-menu slot="dropdown">
+		    <el-dropdown-item>选项1</el-dropdown-item>
+		    <el-dropdown-item>选项2</el-dropdown-item>
+		    <el-dropdown-item>选项3</el-dropdown-item>
+		    <el-dropdown-item>选项4</el-dropdown-item>
+		    <el-dropdown-item>选项5</el-dropdown-item>
+		  </el-dropdown-menu>
+		</el-dropdown>
+	</div>
+	<!--列表3-->
+	<div id="list3">
+		<el-dropdown trigger="click">
+		  <el-button>
+		    根据收件人筛选 ∨
+		  </el-button>
+		  <el-dropdown-menu slot="dropdown">
+		    <el-dropdown-item>选项1</el-dropdown-item>
+		    <el-dropdown-item>选项2</el-dropdown-item>
+		    <el-dropdown-item>选项3</el-dropdown-item>
+		    <el-dropdown-item>选项4</el-dropdown-item>
+		    <el-dropdown-item>选项5</el-dropdown-item>
+		  </el-dropdown-menu>
+		</el-dropdown>
+	</div>
+	<!--搜索框-->
+	<div id="scan">
+	<el-input placeholder="输入内容进行模糊查询" v-model="input2">
+	</el-input>
+	</div>
+	<!--提交按钮-->
+	<div id="button">
+	<el-button style="float: left;display: inline-block;">搜索</el-button>
+	</div>
+	<!--日期选择器-->
+	<div id="date">
+    <el-date-picker type="date" placeholder="选择日期">
+    </el-date-picker>
+  </div>
+</div>
+<!--加载表格-->
+<div id="table">
+<template>
+  <el-table :data="tableData" border stripe style="width: 100%">
+    <el-table-column prop="time" label="时间" width="120">
+    </el-table-column>
+    <el-table-column prop="host" label="主机" width="120">
+    </el-table-column>
+    <el-table-column prop="type" label="类型" width="160">
+    </el-table-column>
+    <el-table-column prop="receive" label="收件人" width="140">
+    </el-table-column>
+    <el-table-column prop="content" label="内容" width="300">
+    </el-table-column>
+    <el-table-column prop="operate" label="操作">
+	    <template slot-scope="scope">
+	        <el-button type="text" size="small">重发</el-button>
+	    </template>
+    </el-table-column>
+  </el-table>
+</template>
+</div>
+<!--分页-->
+<br><br>
+<div id="page">
+<template>
+  <div content="block">
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[10, 20, 30, 40]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="40">
+    </el-pagination>
+  </div>
+</template>
+</div>
+<!-- -->
+<script type="text/javascript">
+	var label = {
+	    data() {
+	      return {
+	        activeIndex: '5',
+			checked: true
+	      };
+	    },
+	    methods: {
+	      handleSelect(key, keyPath) {
+	        console.log(key, keyPath);
+	      }
+	    }
+	  }
+	var Ctor = Vue.extend(label)
+	new Ctor().$mount('#label')
+
+	var list = {
+    methods: {
+      handleClick() {
+        alert('button click');
+      }
+    }
+  }
+	var Ctor = Vue.extend(list)
+	new Ctor().$mount('#list1')
+	new Ctor().$mount('#list2')
+	new Ctor().$mount('#list3')
+
+	var scan = {
+  	data() {
+    return {
+      input2: '',
+      input21: '',
+      input22: '',
+      input23: ''
+	    }
+	  }
+	}
+	var Ctor = Vue.extend(scan)
+	new Ctor().$mount('#scan')
+	new Ctor().$mount('#button')
+	new Ctor().$mount('#date')
+</script>
+<!--表格数据-->
+<script type="text/javascript">
+var table = {
+    data() {
+      return {
+        tableData: [{
+          time: '2018-08-29',
+          host: '127.0.0.1',
+          type: '测试类型',
+          receive: '测试用户',
+          content: '测试内容',
+        },
+        {
+          time: '2018-08-30',
+          host: '127.0.0.1',
+          type: '测试类型',
+          receive: '测试用户',
+          content: '测试内容',
+        },
+        {
+          time: '2018-08-31',
+          host: '127.0.0.1',
+          type: '测试类型',
+          receive: '测试用户',
+          content: '测试内容',
+        },
+        {
+          time: '2018-08-32',
+          host: '127.0.0.1',
+          type: '测试类型',
+          receive: '测试用户',
+          content: '测试内容',
+        },
+        {
+          time: '2018-08-33',
+          host: '127.0.0.1',
+          type: '测试类型',
+          receive: '测试用户',
+          content: '测试内容',
+        },
+        {
+          time: '2018-08-34',
+          host: '127.0.0.1',
+          type: '测试类型',
+          receive: '测试用户',
+          content: '测试内容',
+        },
+        ]
+      }
+    }
+  }
+var Ctor1 = Vue.extend(table)
+new Ctor1().$mount('#table')
+</script>
+<!--分页数据-->
+<script>
+var page = {
+    methods: {
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      }
+    },
+    data() {
+      return {
+        currentPage1: 5,
+        currentPage2: 5,
+        currentPage3: 5,
+        currentPage4: 4
+      };
+    }
+  }
+var Ctor = Vue.extend(page)
+new Ctor().$mount('#page')
+</script>
+</body>
+</html>
